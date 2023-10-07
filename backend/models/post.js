@@ -1,30 +1,31 @@
+//id url title content username likes
+
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
 
-const userSchema = new Schema({
-    username:{
-        type:String,
-        required: true,
-        unique: true
+const PostSchema = new Schema({
+    likes:{
+        type:Number,
+        
     },
-    verify_token: {
+    content: {
         type : String
     },
-    email:{
+    title:{
         type:String,
         required: true,
         unique: true
     },
-    pass:{
+    imageURI:{
         type:String,
         required: true
     },
-    posts: [{
+    username: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Post'
-    }],
+        ref: 'users'
+    },
  
     date: {
         type: Date,
@@ -32,5 +33,5 @@ const userSchema = new Schema({
     },
 }, { timestamps: true });
 
-const user = mongoose.model('users', userSchema)
-module.exports = user;
+const Post = mongoose.model('Post', PostSchema)
+module.exports = Post;
